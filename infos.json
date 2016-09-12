@@ -1,0 +1,10 @@
+{
+  "displayName" : "Running process",
+  "author" : [],
+  "contributor" : [],
+  "supportedAgent" : ["Windows"],
+  "description" : {
+    "fr" : "Remonte les processus actifs",
+    "en" : "Retrieve active process"
+  }
+}
