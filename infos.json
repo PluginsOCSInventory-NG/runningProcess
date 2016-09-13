@@ -1,6 +1,6 @@
 {
   "displayName" : "Running process",
-  "author" : [],
+  "author" : ["Benoit SARDA","Valentin DEVILLE"],
   "contributor" : [],
   "supportedAgent" : ["Windows"],
   "description" : {
