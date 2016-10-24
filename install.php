@@ -16,6 +16,10 @@ $object->add_cd_entry("runningProcess","other");
 $object->sql_query("CREATE TABLE IF NOT EXISTS `runningprocess` (
                       `ID` INT(11) NOT NULL AUTO_INCREMENT,
                       `HARDWARE_ID` INT(11) NOT NULL,
+                      `CPUUSAGE` VARCHAR(255) DEFAULT NULL,
+                      `TTY` VARCHAR(255) DEFAULT NULL,
+                      `STARTED` VARCHAR(15) DEFAULT NULL,
+                      `VIRTUALMEMORY` VARCHAR(255) DEFAULT NULL,
                       `PROCESSNAME` VARCHAR(255) DEFAULT NULL,
                       `PROCESSID` VARCHAR(255) DEFAULT NULL,
                       `USERNAME` VARCHAR(255) DEFAULT NULL,
