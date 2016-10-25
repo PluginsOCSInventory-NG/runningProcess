@@ -2,7 +2,7 @@
   "displayName" : "Running process",
   "author" : ["Benoit SARDA","Valentin DEVILLE","Frank BOURDEAU"],
   "contributor" : [],
-  "supportedAgent" : ["Windows"],["Unix"],
+  "supportedAgent" : ["Windows"], ["Unix"],
   "description" : {
     "fr" : "Remonte les processus actifs",
     "en" : "Retrieve active process"
