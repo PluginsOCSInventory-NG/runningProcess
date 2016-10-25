@@ -49,7 +49,8 @@ sub processes_inventory_handler {
      sub check {
          my $params = shift;
          my $common = $params->{common};
-         $common->can_run("ps")
+
+         $common->can_run("ps");
      }
 
      my $line;
@@ -84,15 +85,15 @@ sub processes_inventory_handler {
          next if ($. ==1);
          if ($line =~
              /^(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(\S+)\s+(.*?)\s*$/){
-             my $user = $1;
-             my $pid= $2;
-             my $cpu= $3;
-             my $mem= $4;
-             my $vsz= $5;
-             my $tty= $7;
-             my $started= $9;
-             my $time= $10;
-             my $cmd= $11;
+             my $user=$1;
+             my $pid=$2;
+             my $cpu=$3;
+             my $mem=$4;
+             my $vsz=$5;
+             my $tty=$7;
+             my $started=$9;
+             my $time=$10;
+             my $cmd=$11;
 
              if ($started =~ /^(\w{3})/)  {
                  my $d=substr($started, 3);
@@ -102,8 +103,7 @@ sub processes_inventory_handler {
                  $begin=$the_year."-".$mon."-".$mday." ".$started;
              }
 
-             push @{$common->{xmltags}->{RUNNING_PROCESSES}},
-             {
+             addProcesses($common->{xmltags},{
                  USERNAME => $user,
                  PROCESSID => $pid,
                  CPUUSAGE => $cpu,
@@ -112,10 +112,33 @@ sub processes_inventory_handler {
                  TTY => $tty,
                  STARTED => $begin,
                  COMMANDLINE => $cmd
-             };
+             });
          }
      }
      close(PS);
 }
 
 1;
+sub addProcesses {
+    my ($xmltags,$args) = @_;
+
+    my $user = $args->{USERNAME};
+    my $processid = $args->{PROCESSID};
+    my $cpuusage = $args->{CPUUSAGE};
+    my $processmemory = $args->{PROCESSMEMORY};
+    my $virtualmem = $args->{VIRTUALMEMORY};
+    my $tty = $args->{TTY};
+    my $started = $args->{STARTED};
+    my $cmdline = $args->{COMMANDLINE};
+
+    push @{$xmltags->{RUNNING_PROCESSES}},{
+        USERNAME => [$user],
+        PROCESSID => [$processid],
+        CPUUSAGE => [$cpuusage],
+        PROCESSMEMORY => [$processmemory],
+        VIRTUALMEMORY => [$virtualmem],
+        TTY => [$tty],
+        STARTED => [$started],
+        COMMANDLINE => [$cmdline],
+     };
+}
