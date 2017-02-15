@@ -1,17 +1,17 @@
 <?php
-function plugin_version_runningProcess()
+function plugin_version_runningprocess()
 {
-return array('name' => 'Running process',
+return array('name' => 'Running Process',
 'version' => '1.0',
 'author'=> 'Community, Valentin DEVILLE',
 'license' => 'GPLv2',
 'verMinOcs' => '2.2');
 }
 
-function plugin_init_runningProcess()
+function plugin_init_runningprocess()
 {
 $object = new plugins;
-$object->add_cd_entry("runningProcess","other");
+$object->add_cd_entry("runningprocess","other");
 
 $object->sql_query("CREATE TABLE IF NOT EXISTS `runningprocess` (
                       `ID` INT(11) NOT NULL AUTO_INCREMENT,
@@ -32,10 +32,10 @@ $object->sql_query("CREATE TABLE IF NOT EXISTS `runningprocess` (
 
 }
 
-function plugin_delete_runningProcess()
+function plugin_delete_runningprocess()
 {
 $object = new plugins;
-$object->del_cd_entry("runningProcess");
+$object->del_cd_entry("runningprocess");
 $object->sql_query("DROP TABLE `runningprocess`");
 
 }

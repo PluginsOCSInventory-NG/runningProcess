@@ -32,7 +32,7 @@ else{
     echo open_form($form_name);
 	$list_fields = array(
          'CPUUSAGE' => 'CPUUSAGE',
-         'TTY' => 'TTY', 
+         'TTY' => 'TTY',
          'STARTED' => 'STARTED',
          'VIRTUALMEMORY' => 'VIRTUALMEMORY',
          'PROCESSNAME' => 'PROCESSNAME',

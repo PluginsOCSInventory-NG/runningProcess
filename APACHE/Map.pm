@@ -1,5 +1,4 @@
 
- 
 package Apache::Ocsinventory::Plugins::Runningprocess::Map;
  
 use strict;
