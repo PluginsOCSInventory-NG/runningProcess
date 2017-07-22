@@ -14,20 +14,21 @@ If InStr(objOperatingSystem.version,"5.0.")<>0 Then 																									  '
 	 CompPropNum=16
 	 DescrPropNum=17
 End If
-if InStr(objOperatingSystem.version,"5.1.")<>0 Or InStr(objOperatingSystem.version,"5.2.")<>0 Then		'os is windows XP or 2003
+If InStr(objOperatingSystem.version,"5.1.")<>0 Or InStr(objOperatingSystem.version,"5.2.")<>0 Then  'os is windows XP or 2003
    CompPropNum=35
 	 DescrPropNum=36
 End If
-if InStr(objOperatingSystem.version,"6.0.")<>0 Or InStr(objOperatingSystem.version,"6.1.")<>0 Then 	  'os is windows Vista or 2008 or Windows 7 or 2008 r2
+If InStr(objOperatingSystem.version,"6.0.")<>0 Or InStr(objOperatingSystem.version,"6.1.")<>0 Then   'os is windows Vista or 2008 or Windows 7 or 2008 r2
    CompPropNum=33
 	 DescrPropNum=34
 End If
 Next
 
-If CompPropNum=0 Then wscript.quit 2              'operating system not supported, exiting with code 2
+If CompPropNum=0 Then wscript.quit 2  'Operating system not supported, exiting with code 2
 
 strComputer = "."
-Set colProcesses = GetObject("winmgmts:" & "{impersonationLevel=impersonate}!\\" & strComputer & "\root\cimv2").ExecQuery("Select * from Win32_Process")
+Set colProcesses = GetObject("winmgmts:" & "{impersonationLevel=impersonate}!\\" &_
+	strComputer & "\root\cimv2").ExecQuery("Select * from Win32_Process")
 
 For Each objProcess in colProcesses
   WSCript.Echo _
