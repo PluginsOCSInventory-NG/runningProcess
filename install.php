@@ -36,6 +36,8 @@ function plugin_delete_runningprocess()
 {
 $object = new plugins;
 $object->del_cd_entry("runningprocess");
-$object->sql_query("DROP TABLE `runningprocess`");
+$object->sql_query("DROP TABLE `runningprocess`;");
 
 }
+
+?>
