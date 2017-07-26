@@ -11,40 +11,42 @@ Set colOperatingSystems = objWMIService.ExecQuery ("Select * from Win32_Operatin
 
 For Each objOperatingSystem in colOperatingSystems
 If InStr(objOperatingSystem.version,"5.0.")<>0 Then 																									  'os is windows 2000
-	 CompPropNum=16
-	 DescrPropNum=17
+	CompPropNum=16
+	DescrPropNum=17
 End If
-If InStr(objOperatingSystem.version,"5.1.")<>0 Or InStr(objOperatingSystem.version,"5.2.")<>0 Then  'os is windows XP or 2003
-   CompPropNum=35
-	 DescrPropNum=36
+if InStr(objOperatingSystem.version,"5.1.")<>0 Or InStr(objOperatingSystem.version,"5.2.")<>0 Then		'os is windows XP or 2003
+	CompPropNum=35
+	DescrPropNum=36
 End If
-If InStr(objOperatingSystem.version,"6.0.")<>0 Or InStr(objOperatingSystem.version,"6.1.")<>0 Then   'os is windows Vista or 2008 or Windows 7 or 2008 r2
-   CompPropNum=33
-	 DescrPropNum=34
+if InStr(objOperatingSystem.version,"6.0.")<>0 Or InStr(objOperatingSystem.version,"6.1.")<>0 Then 	  'os is windows Vista or 2008 or Windows 7 or 2008 r2
+	CompPropNum=33
+	DescrPropNum=34
 End If
+	If InStr(objOperatingSystem.version,"10.0.")<>0 Or InStr(objOperatingSystem.version,"10.1.")<>0 Then 'os is windows 10 or 2012
+		CompPropNum=33
+		DescrPropNum=34
+	End If
+	WScript.echo objOperatingSystem.version
 Next
 
-If CompPropNum=0 Then wscript.quit 2  'Operating system not supported, exiting with code 2
+If CompPropNum=0 Then wscript.quit 2              'operating system not supported, exiting with code 2
 
 strComputer = "."
-Set colProcesses = GetObject("winmgmts:" & "{impersonationLevel=impersonate}!\\" &_
-	strComputer & "\root\cimv2").ExecQuery("Select * from Win32_Process")
+Set colProcesses = GetObject("winmgmts:" & "{impersonationLevel=impersonate}!\\" & strComputer & "\root\cimv2").ExecQuery("Select * from Win32_Process")
 
 For Each objProcess in colProcesses
-  WSCript.Echo _
-	"<RUNNING_PROCESSES>" & VbCrLf &_
-	"<PROCESSNAME>" & objProcess.Name & "</PROCESSNAME>" & VbCrLf &_
-	"<PROCESSID>" & objProcess.ProcessId & "</PROCESSID>"
+  WSCript.Echo "<RUNNING_PROCESSES>"
+  Wscript.echo "  <PROCESSNAME>" & objProcess.Name & "</PROCESSNAME>"
+  Wscript.Echo "  <PROCESSID>" & objProcess.ProcessId & "</PROCESSID>"
   Return = objProcess.GetOwner(strNameOfUser)
-  Wscript.Echo _
-	"<USERNAME>" & strNameOfUser & "</USERNAME>" & VbCrLf &_
-	"<PROCESSMEMORY>" & round(objProcess.workingsetsize/1024) & "</PROCESSMEMORY>"  'return results in kilobytes
+  Wscript.Echo "  <USERNAME>" & strNameOfUser & "</USERNAME>"
+  Wscript.Echo "  <PROCESSMEMORY>" & round(objProcess.workingsetsize/1024) & "</PROCESSMEMORY>"          'return results in kilobytes
   If CompPropNum<>16 then
-    Wscript.Echo "<COMMANDLINE>" & objProcess.commandline & "</COMMANDLINE>"
-Else
+    Wscript.Echo "  <COMMANDLINE>" & objProcess.commandline & "</COMMANDLINE>"
+  else
     'Win 2000 does not support the commandline property, let's use the executable path instead
-    Wscript.Echo "<COMMANDLINE>" & objProcess.executablepath & "</COMMANDLINE>"
-End if
+    Wscript.Echo "  <COMMANDLINE>" & objProcess.executablepath & "</COMMANDLINE>"
+  end if
 
   'extract the file description and company values from the executable
   expath= objProcess.executablePath
@@ -59,8 +61,7 @@ End if
     description = folder.GetDetailsOf(file, DescrPropNum)
     company = folder.GetDetailsOf(file, CompPropNum)
   End If
-  Wscript.Echo _
-	"<DESCRIPTION>" & description & "</DESCRIPTION>" & VbCrLf &_
-	"<COMPANY>" & company & "</COMPANY>" & VbCrLf &_
-  	"</RUNNING_PROCESSES>"
+  Wscript.Echo "  <DESCRIPTION>" & description & "</DESCRIPTION>"
+  Wscript.Echo "  <COMPANY>" & company & "</COMPANY>"
+  WSCript.Echo "</RUNNING_PROCESSES>"
 Next
