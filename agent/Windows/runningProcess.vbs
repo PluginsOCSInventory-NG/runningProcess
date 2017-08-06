@@ -35,7 +35,7 @@ strComputer = "."
 Set colProcesses = GetObject("winmgmts:" & "{impersonationLevel=impersonate}!\\" & strComputer & "\root\cimv2").ExecQuery("Select * from Win32_Process")
 
 For Each objProcess in colProcesses
-  WSCript.Echo "<RUNNING_PROCESSES>"
+  WSCript.Echo "<RUNNINGPROCESS>"
   Wscript.echo "  <PROCESSNAME>" & objProcess.Name & "</PROCESSNAME>"
   Wscript.Echo "  <PROCESSID>" & objProcess.ProcessId & "</PROCESSID>"
   Return = objProcess.GetOwner(strNameOfUser)
@@ -63,5 +63,5 @@ For Each objProcess in colProcesses
   End If
   Wscript.Echo "  <DESCRIPTION>" & description & "</DESCRIPTION>"
   Wscript.Echo "  <COMPANY>" & company & "</COMPANY>"
-  WSCript.Echo "</RUNNING_PROCESSES>"
+  WSCript.Echo "</RUNNINGPROCESS>"
 Next
