@@ -31,17 +31,13 @@ else{
     $tab_options['table_name']=$table_name;
     echo open_form($form_name);
 	$list_fields = array(
-         'CPUUSAGE' => 'CPUUSAGE',
-         'TTY' => 'TTY',
-         'STARTED' => 'STARTED',
-         'VIRTUALMEMORY' => 'VIRTUALMEMORY',
-         'PROCESSNAME' => 'PROCESSNAME',
-         'PROCESSID' => 'PROCESSID',
-         'USERNAME' => 'USERNAME',
-         'PROCESSMEMORY' => 'PROCESSMEMORY',
-         'COMMANDLINE' => 'COMMANDLINE',
-         'DESCRIPTION' => 'DESCRIPTION',
-         'COMPANY' => 'COMPANY'
+         'Name' => 'PROCESSNAME',
+         'ID' => 'PROCESSID',
+         'User name' => 'USERNAME',
+         'Memory' => 'PROCESSMEMORY',
+         'Command line' => 'COMMANDLINE',
+         'Description' => 'DESCRIPTION',
+         'Company' => 'COMPANY'
     );
     $list_col_cant_del=$list_fields;
     $default_fields= $list_fields;
@@ -58,3 +54,4 @@ else{
         tab_req($list_fields,$default_fields,$list_col_cant_del,$sql['SQL'],$tab_options);
         ob_start();
     }
+?>
