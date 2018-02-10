@@ -2,7 +2,7 @@
 function plugin_version_runningprocess()
 {
 return array('name' => 'Running Process',
-'version' => '1.0',
+'version' => '1.1',
 'author'=> 'Community, Valentin DEVILLE',
 'license' => 'GPLv2',
 'verMinOcs' => '2.2');
@@ -36,6 +36,8 @@ function plugin_delete_runningprocess()
 {
 $object = new plugins;
 $object->del_cd_entry("runningprocess");
-$object->sql_query("DROP TABLE `runningprocess`");
+$object->sql_query("DROP TABLE `runningprocess`;");
 
 }
+
+?>
