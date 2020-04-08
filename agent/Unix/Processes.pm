@@ -131,7 +131,7 @@ sub addProcesses {
     my $started = $args->{STARTED};
     my $cmdline = $args->{COMMANDLINE};
 
-    push @{$xmltags->{RUNNING_PROCESSES}},{
+    push @{$xmltags->{RUNNINGPROCESS}},{
         USERNAME => [$user],
         PROCESSID => [$processid],
         CPUUSAGE => [$cpuusage],
